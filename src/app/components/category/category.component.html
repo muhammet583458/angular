@@ -1,3 +1,5 @@
 <ul class="list-group">
-    <li class="list-group-item" *ngFor="let category of categories">{{category.categoryName}}</li>
-  </ul>
+  <li (click)="setCurrentCategory(category)" *ngFor="let category of categories" [class]="getCurrentCategoryClass(category)">{{category.categoryName}}</li>
+  
+</ul>
+<h5 *ngIf="currentCategory">{{currentCategory.categoryName}} seçtin</h5>

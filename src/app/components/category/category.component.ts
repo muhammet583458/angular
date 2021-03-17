@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Category } from 'src/app/models/category';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-category',
@@ -6,17 +8,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./category.component.css'],
 })
 export class CategoryComponent implements OnInit {
- 
-  category1 = {
-    categoryName: 'sa',
-  };
-  category2 = {
-    categoryName: 'sas',
-  };
-  category3 = {
-    categoryName: 'saa',
-  };
-  categories = [this.category1, this.category2, this.category3];
-   constructor() {}
-   ngOnInit(): void {}
+  categories: Category[] = [];
+  currentCategory: Category;
+  dataLoaded = false;
+  constructor(private productService: CategoryService) {}
+  ngOnInit(): void {
+    this.getCategories();
+  }
+  getCategories() {
+    this.productService.getCategories().subscribe((response) => {
+      this.categories = response.data;
+      this.dataLoaded = true;
+    });
+  }
+  setCurrentCategory(category: Category) {
+    this.currentCategory = category;
+  }
+  getCurrentCategoryClass(category: Category) {
+    if (category == this.currentCategory) {
+      return 'list-group-item active';
+    }
+    else{
+      return "list-group-item";
+    }
+  }
 }
