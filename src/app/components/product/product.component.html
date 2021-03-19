@@ -28,6 +28,7 @@
       <th>Fiyat</th>
       <th>Kdv'li Fiyat</th>
       <th>Stok Adedi</th>
+      <th></th>
     </tr>
   </thead>
   <tr *ngFor="let product of products | fiterPipe:filterText">
@@ -37,5 +38,6 @@
     <td>{{ product.unitPrice | currency:"₺" }}</td>
     <td>{{ product.unitPrice | vatAdded: 18 | currency:"₺" }}</td>
     <td>{{ product.unitsInStock }}</td>
+    <td></td>
   </tr>
 </table>
